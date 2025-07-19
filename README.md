@@ -23,7 +23,7 @@ This project uses Python and GitHub Actions to check multiple platforms (named U
 
 ## GitHub Actions
 
-The workflow (`.github/workflows/platform_status_check.yml`) runs daily at **10 AM IST** (04:30 UTC) and sends email reports automatically, attaching a PDF of any failures.
+The workflow (`.github/workflows/platform_monitor.yml`) runs daily at **10 AM IST** (04:30 UTC) and sends email reports automatically, attaching a PDF of any failures.
 
 ## Contributing
 
