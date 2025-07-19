@@ -1,0 +1,57 @@
+name: Daily Platform Status Check
+
+on:
+  schedule:
+    # Runs every day at 10:00 AM IST (04:30 UTC)
+    - cron: '30 4 * * *'
+  workflow_dispatch:
+
+jobs:
+  check-platforms:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Cache pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run platform monitor
+        env:
+          URL_CDL_HOME:     ${{ secrets.URL_CDL_HOME }}
+          URL_OBI:          ${{ secrets.URL_OBI }}
+          URL_JUSTICE_HUB:  ${{ secrets.URL_JUSTICE_HUB }}
+          URL_OCI:          ${{ secrets.URL_OCI }}
+          URL_HP_FISCAL:    ${{ secrets.URL_HP_FISCAL }}
+          EMAIL_HOST:       ${{ secrets.EMAIL_HOST }}
+          EMAIL_PORT:       ${{ secrets.EMAIL_PORT }}
+          EMAIL_USER:       ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS:       ${{ secrets.EMAIL_PASS }}
+          EMAIL_TO:         ${{ secrets.EMAIL_TO }}
+        run: |
+          export PYTHONPATH=$GITHUB_WORKSPACE
+          python scripts/main.py
+
+      - name: Upload PDF report (if any)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: platform-status-report
+          path: platform_status_report.pdf
+          if-no-files-found: ignore
