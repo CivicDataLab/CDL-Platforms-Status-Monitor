@@ -35,10 +35,55 @@ jobs:
       - name: Run platform monitor
         env:
           URL_CDL_HOME:     ${{ secrets.URL_CDL_HOME }}
+          URL_CIVICDATASPACE: ${{ secrets.URL_CIVICDATASPACE }}
+          URL_ANALYTICS_CIVICDATASPACE: ${{ secrets.URL_ANALYTICS_CIVICDATASPACE }}
+          URL_STATE_OF_FOSS:     ${{ secrets.URL_STATE_OF_FOSS }}
+          URL_STIR_EDU:     ${{ secrets.URL_STIR_EDU }}
+          URL_OPEN_CITY:     ${{ secrets.URL_OPEN_CITY }}
+          URL_BMA_DASHBOARD:     ${{ secrets.URL_BMA_DASHBOARD }}
+          URL_SUPERSET:     ${{ secrets.URL_SUPERSET }}
+          URL_SUPERSET_V2:     ${{ secrets.URL_SUPERSET_V2 }}
+          URL_PETA_INFO:     ${{ secrets.URL_PETA_INFO }}
+          URL_MAPA:     ${{ secrets.URL_MAPA }}
+          URL_PETA:     ${{ secrets.URL_PETA }}
           URL_OBI:          ${{ secrets.URL_OBI }}
-          URL_JUSTICE_HUB:  ${{ secrets.URL_JUSTICE_HUB }}
+          URL_OBI_UNION_DASH_24_25:     ${{ secrets.URL_OBI_UNION_DASH_24_25 }}
+          URL_OBI_UNION_DASH_23_24:     ${{ secrets.URL_OBI_UNION_DASH_23_24 }}
+          URL_OBI_UNION_DASH_22_23:     ${{ secrets.URL_OBI_UNION_DASH_22_23 }}
+          URL_OBI_UNION_DASH_21_22:     ${{ secrets.URL_OBI_UNION_DASH_21_22 }}
+          URL_OBI_UNION_DASH_20_21:     ${{ secrets.URL_OBI_UNION_DASH_20_21 }}
+          URL_OBI_UNION_DASH_19_20:     ${{ secrets.URL_OBI_UNION_DASH_19_20 }}
+          URL_OBI_UNION_DASH_18_19:     ${{ secrets.URL_OBI_UNION_DASH_18_19 }}
+          URL_OBI_ODISHA_BUDGET:     ${{ secrets.URL_OBI_ODISHA_BUDGET }}
+          URL_OBI_HP_FISCAL:     ${{ secrets.URL_OBI_HP_FISCAL }}
+          URL_OBI_ASSAM_BUDGET_23_24:     ${{ secrets.URL_OBI_ASSAM_BUDGET_23_24 }}
+          URL_OBI_ASSAM_BUDGET_22_23:     ${{ secrets.URL_OBI_ASSAM_BUDGET_22_23 }}
+          URL_OBI_ASSAM_BUDGET_21_22:     ${{ secrets.URL_OBI_ASSAM_BUDGET_21_22 }}
+          URL_OBI_ASSAM_BUDGET_20_21:     ${{ secrets.URL_OBI_ASSAM_BUDGET_20_21 }}
+          URL_OBI_ASSAM_BUDGET_19_20:          ${{ secrets.URL_OBI_ASSAM_BUDGET_19_20 }}
+          URL_OBI_CONSTITUENCY:          ${{ secrets.URL_OBI_CONSTITUENCY }}
+          URL_OBI_DISTRICT:          ${{ secrets.URL_OCI }}
+          URL_OBI_SCHEMES:          ${{ secrets.URL_OBI_SCHEMES }}
+          URL_OBI_GOVT_BUDGET_DATA:          ${{ secrets.URL_OBI_GOVT_BUDGET_DATA }}
+          URL_OBI_SECTOR_BUDGET_DATA:          ${{ secrets.URL_OBI_SECTOR_BUDGET_DATA }}
+          URL_OBI_ALL_DATASETS:          ${{ secrets.URL_OBI_ALL_DATASETS }}
+          URL_OBI_BUDGET_BASICS:          ${{ secrets.URL_OBI_BUDGET_BASICS }}
+          URL_JUSTICE_HUB:          ${{ secrets.URL_JUSTICE_HUB }}
+          URL_JH_BUDGETS:          ${{ secrets.URL_JH_BUDGETS }}
+          URL_JH_KHOJ:          ${{ secrets.URL_JH_KHOJ }}
+          URL_JH_SUMMER_OF_DATA:          ${{ secrets.URL_JH_SUMMER_OF_DATA }}
+          URL_JH_ZOMBIE_TRACKER:          ${{ secrets.URL_JH_ZOMBIE_TRACKER }}
+          URL_JH_DATA_FOR_INJUSTICE:          ${{ secrets.URL_JH_DATA_FOR_INJUSTICE }}
+          URL_JH_FORUM:          ${{ secrets.URL_JH_FORUM }}
           URL_OCI:          ${{ secrets.URL_OCI }}
-          URL_HP_FISCAL:    ${{ secrets.URL_HP_FISCAL }}
+          URL_OCI_ASSAM: ${{ secrets.URL_OCI_ASSAM }}
+          URL_GEST: ${{ secrets.URL_GEST }}
+          URL_GEST_ASSAM: ${{ secrets.URL_GEST_ASSAM }}
+          URL_GEST_BIHAR: ${{ secrets.URL_GEST_BIHAR }}
+          URL_GEST_UP: ${{ secrets.URL_GEST_UP }}
+          URL_IDS_DRR:          ${{ secrets.URL_IDS_DRR }}
+          URL_ASSAM_TENDER:          ${{ secrets.URL_ASSAM_TENDER }}
+
           EMAIL_HOST:       ${{ secrets.EMAIL_HOST }}
           EMAIL_PORT:       ${{ secrets.EMAIL_PORT }}
           EMAIL_USER:       ${{ secrets.EMAIL_USER }}
