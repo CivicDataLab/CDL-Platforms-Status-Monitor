@@ -68,6 +68,7 @@ jobs:
           URL_OBI_SECTOR_BUDGET_DATA:          ${{ secrets.URL_OBI_SECTOR_BUDGET_DATA }}
           URL_OBI_ALL_DATASETS:          ${{ secrets.URL_OBI_ALL_DATASETS }}
           URL_OBI_BUDGET_BASICS:          ${{ secrets.URL_OBI_BUDGET_BASICS }}
+          URL_OBI_FORUM:          ${{ secrets.URL_OBI_FORUM }}
           URL_JUSTICE_HUB:          ${{ secrets.URL_JUSTICE_HUB }}
           URL_JH_BUDGETS:          ${{ secrets.URL_JH_BUDGETS }}
           URL_JH_KHOJ:          ${{ secrets.URL_JH_KHOJ }}
