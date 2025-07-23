@@ -38,7 +38,6 @@ jobs:
           URL_CIVICDATASPACE: ${{ secrets.URL_CIVICDATASPACE }}
           URL_ANALYTICS_CIVICDATASPACE: ${{ secrets.URL_ANALYTICS_CIVICDATASPACE }}
           URL_STATE_OF_FOSS:     ${{ secrets.URL_STATE_OF_FOSS }}
-          URL_STIR_EDU:     ${{ secrets.URL_STIR_EDU }}
           URL_OPEN_CITY:     ${{ secrets.URL_OPEN_CITY }}
           URL_BMA_DASHBOARD:     ${{ secrets.URL_BMA_DASHBOARD }}
           URL_SUPERSET:     ${{ secrets.URL_SUPERSET }}
