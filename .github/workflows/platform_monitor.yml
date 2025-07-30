@@ -61,7 +61,13 @@ jobs:
           URL_OBI_ASSAM_BUDGET_20_21:     ${{ secrets.URL_OBI_ASSAM_BUDGET_20_21 }}
           URL_OBI_ASSAM_BUDGET_19_20:          ${{ secrets.URL_OBI_ASSAM_BUDGET_19_20 }}
           URL_OBI_CONSTITUENCY:          ${{ secrets.URL_OBI_CONSTITUENCY }}
-          URL_OBI_DISTRICT:          ${{ secrets.URL_OCI }}
+          URL_OBI_DISTRICT:          ${{ secrets.URL_OBI_DISTRICT }}
+          URL_OBI_DISTRICT_BIHAR:     ${{ secrets.URL_OBI_DISTRICT_BIHAR }}
+          URL_OBI_DISTRICT_CHHATIS:   ${{ secrets.URL_OBI_DISTRICT_CHHATIS }}
+          URL_OBI_DISTRICT_JHAR:      ${{ secrets.URL_OBI_DISTRICT_JHAR }}
+          URL_OBI_DISTRICT_MAHARASH:  ${{ secrets.URL_OBI_DISTRICT_MAHARASH }}
+          URL_OBI_DISTRICT_ODISHA:    ${{ secrets.URL_OBI_DISTRICT_ODISHA }}
+          URL_OBI_DISTRICT_UP:        ${{ secrets.URL_OBI_DISTRICT_UP }}
           URL_OBI_SCHEMES:          ${{ secrets.URL_OBI_SCHEMES }}
           URL_OBI_GOVT_BUDGET_DATA:          ${{ secrets.URL_OBI_GOVT_BUDGET_DATA }}
           URL_OBI_SECTOR_BUDGET_DATA:          ${{ secrets.URL_OBI_SECTOR_BUDGET_DATA }}
