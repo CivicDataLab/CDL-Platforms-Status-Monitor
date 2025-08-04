@@ -2,6 +2,7 @@ import os
 import tempfile
 import logging
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from typing import List
 
 from reportlab.lib.pagesizes import LETTER
@@ -18,6 +19,9 @@ BASE_DIR = os.path.dirname(__file__)
 ASSETS_DIR = os.path.join(BASE_DIR, "..", "assets")
 SAMPLE_REPORT_PDF = os.path.join(ASSETS_DIR, "sample_report.pdf")
 OUTPUT_PDF = "platform_status_report.pdf"
+
+# Define IST timezone
+IST = ZoneInfo("Asia/Kolkata")
 
 
 def _build_body_pdf(results: List[dict], body_pdf_path: str) -> None:
@@ -41,10 +45,10 @@ def _build_body_pdf(results: List[dict], body_pdf_path: str) -> None:
         topMargin=inch * 1.5,
         bottomMargin=inch * 1.2
     )
-
+    now_ist = datetime.now(IST)
     story = [
         Paragraph(
-            f"Platform Status Report – {datetime.now():%Y-%m-%d %H:%M:%S}",
+            f"Platform Status Report – {now_ist:%Y-%m-%d %H:%M:%S} IST",
             styles["Title"]
         ),
         Spacer(1, 12),

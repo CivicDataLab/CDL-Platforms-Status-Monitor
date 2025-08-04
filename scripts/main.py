@@ -1,6 +1,8 @@
 import logging, sys, pathlib
 from monitor import config, checks, report, emailer
 
+subject = f"Platform Status Alert "
+
 logging.basicConfig(level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -20,7 +22,7 @@ def main():
     report.generate_pdf_report(failures, outfile=str(out_pdf))
 
     body = f"{len(failures)} site(s) failed. See attached report."
-    emailer.send_email("Platform Status Alert", body, [str(out_pdf)])
+    emailer.send_email(subject, body, [str(out_pdf)])
 
 if __name__ == "__main__":
     main()
