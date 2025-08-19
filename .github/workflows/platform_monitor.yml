@@ -80,6 +80,7 @@ jobs:
           URL_JH_SUMMER_OF_DATA:          ${{ secrets.URL_JH_SUMMER_OF_DATA }}
           URL_JH_ZOMBIE_TRACKER:          ${{ secrets.URL_JH_ZOMBIE_TRACKER }}
           URL_JH_DATA_FOR_INJUSTICE:          ${{ secrets.URL_JH_DATA_FOR_INJUSTICE }}
+          ALLOW_403_FOR: ${{ secrets.ALLOW_403_FOR }}
           URL_JH_FORUM:          ${{ secrets.URL_JH_FORUM }}
           URL_OCI:          ${{ secrets.URL_OCI }}
           URL_OCI_ASSAM: ${{ secrets.URL_OCI_ASSAM }}

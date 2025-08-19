@@ -3,3 +3,5 @@ __pycache__/
 .env
 venv/
 .idea/
+platform_status_report.pdf
+.DS_Store
