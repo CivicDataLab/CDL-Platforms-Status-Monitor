@@ -22,7 +22,9 @@ def check_url(url: str, timeout: int = 10) -> dict:
             return {"url": url, "status": "Success", "status_code": 200, "error": None}
 
         if r.status_code == 403:
+            print("🔥🔥🔥 inside 403 block", host)
             if host.endswith("substack.com") or host == "substack.com":
+                print("✅ Substack override triggered")
                 return {
                     "url": url,
                     "status": "Success (403 allowed)",

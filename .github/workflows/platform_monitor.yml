@@ -1,6 +1,7 @@
 name: Daily Platform Status Check
 
 on:
+  push:
   schedule:
     # Runs every day at 10:00 AM IST (04:30 UTC)
     - cron: '30 4 * * *'
