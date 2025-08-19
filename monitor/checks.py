@@ -21,16 +21,14 @@ def check_url(url: str, timeout: int = 10) -> dict:
         if r.status_code == 200:
             return {"url": url, "status": "Success", "status_code": 200, "error": None}
 
-        if r.status_code == 403 and any(
-            host == domain or host.endswith("." + domain)
-            for domain in ALLOW_403_FOR
-        ):
-            return {
-                "url": url,
-                "status": "Success (403 allowed)",
-                "status_code": 403,
-                "error": None
-            }
+        if r.status_code == 403:
+            if host.endswith("substack.com") or host == "substack.com":
+                return {
+                    "url": url,
+                    "status": "Success (403 allowed)",
+                    "status_code": 403,
+                    "error": None
+                }
 
         return {
             "url": url,
