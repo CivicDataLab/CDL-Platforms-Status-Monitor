@@ -14,6 +14,9 @@ def check_url(url: str, timeout: int = 10) -> dict:
     try:
         r = requests.get(url, timeout=timeout)
         host = urlparse(url).hostname or ""
+        host = host.lower()
+
+        print(f"URL: {url}, host: {host}, ALLOW_403_FOR: {ALLOW_403_FOR}")
 
         if r.status_code == 200:
             return {"url": url, "status": "Success", "status_code": 200, "error": None}
