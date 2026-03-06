@@ -12,7 +12,7 @@ def main():
         logging.error("URLS env var empty"); sys.exit(1)
 
     results = checks.check_named_urls(named_urls)
-    failures = [r for r in results if r["status"] != "Success"]
+    failures = [r for r in results if not r["status"].startswith("Success")]
 
     if not failures:
         logging.info("✅ All %d URL(s) OK – no e-mail", len(named_urls))
