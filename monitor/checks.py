@@ -1,6 +1,7 @@
 import os
 import requests
 import logging
+from concurrent.futures import ThreadPoolExecutor
 from urllib.parse import urlparse
 
 HEADERS = {
@@ -38,10 +39,14 @@ def check_url(url: str, timeout: int = 10) -> dict:
         logging.error("Error checking %s -> %s", url, exc)
         return {"url": url, "status": "Failed", "status_code": None, "error": str(exc)}
 
-def check_named_urls(named_urls: dict):
-    results = []
-    for name, url in named_urls.items():
-        result = check_url(url)
-        result["name"] = name
-        results.append(result)
+def _check_named_url(item):
+    name, url = item
+    result = check_url(url)
+    result["name"] = name
+    return result
+
+
+def check_named_urls(named_urls: dict, max_workers: int = 8):
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        results = list(executor.map(_check_named_url, named_urls.items()))
     return results

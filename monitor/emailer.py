@@ -1,11 +1,13 @@
 import os, smtplib, logging
 from email.message import EmailMessage
 from typing import List
-from .config import SMTP
 
-def send_email(subject: str, body: str, attachments: List[str]):
+
+def send_email(subject: str, body: str, attachments: List[str], smtp: dict):
     msg = EmailMessage()
-    msg["From"], msg["To"], msg["Subject"] = SMTP["user"], SMTP["to"], subject
+    msg["From"] = smtp["user"]
+    msg["To"] = ", ".join(smtp["to"])
+    msg["Subject"] = subject
     msg.set_content(body)
 
     for path in attachments:
@@ -13,8 +15,8 @@ def send_email(subject: str, body: str, attachments: List[str]):
             msg.add_attachment(f.read(), maintype="application",
                                subtype="pdf", filename=os.path.basename(path))
 
-    with smtplib.SMTP(SMTP["host"], SMTP["port"]) as server:
+    with smtplib.SMTP(smtp["host"], smtp["port"]) as server:
         server.starttls()
-        server.login(SMTP["user"], SMTP["password"])
+        server.login(smtp["user"], smtp["password"])
         server.send_message(msg)
-    logging.info("Alert e-mail sent to %s", SMTP["to"])
+    logging.info("Alert e-mail sent to %s", ", ".join(smtp["to"]))

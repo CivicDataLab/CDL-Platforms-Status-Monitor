@@ -3,6 +3,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
+class ConfigError(ValueError):
+    """Raised when required runtime configuration is missing or invalid."""
+
+
 def get_named_urls():
     disabled_raw = os.getenv("DISABLED_GROUPS", "")
     disabled_groups = [g.strip().upper() for g in disabled_raw.split(",") if g.strip()]
@@ -16,10 +21,42 @@ def get_named_urls():
             urls[name] = v.strip()
     return urls
 
-SMTP = {
-    "host": os.getenv("EMAIL_HOST", ""),
-    "port": int(os.getenv("EMAIL_PORT", 587)),
-    "user": os.getenv("EMAIL_USER", ""),
-    "password": os.getenv("EMAIL_PASS", ""),
-    "to": os.getenv("EMAIL_TO", ""),
-}
+
+def parse_email_recipients(raw: str):
+    normalized = raw.replace(";", ",")
+    return [email.strip() for email in normalized.split(",") if email.strip()]
+
+
+def get_smtp_config():
+    port_raw = os.getenv("EMAIL_PORT", "587")
+    try:
+        port = int(port_raw)
+    except ValueError as exc:
+        raise ConfigError("EMAIL_PORT must be an integer") from exc
+
+    smtp = {
+        "host": os.getenv("EMAIL_HOST", "").strip(),
+        "port": port,
+        "user": os.getenv("EMAIL_USER", "").strip(),
+        "password": os.getenv("EMAIL_PASS", ""),
+        "to": parse_email_recipients(os.getenv("EMAIL_TO", "")),
+    }
+
+    missing = [
+        key
+        for key in ("host", "user", "password")
+        if not smtp[key]
+    ]
+    if missing:
+        env_var_names = {
+            "host": "EMAIL_HOST",
+            "user": "EMAIL_USER",
+            "password": "EMAIL_PASS",
+        }
+        env_names = ", ".join(env_var_names[key] for key in missing)
+        raise ConfigError(f"Missing required email configuration: {env_names}")
+
+    if not smtp["to"]:
+        raise ConfigError("EMAIL_TO must contain at least one recipient")
+
+    return smtp

@@ -1,6 +1,7 @@
 import os
 import tempfile
 import logging
+from html import escape
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from typing import List
@@ -14,14 +15,16 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from pypdf import PdfReader, PdfWriter
 from pypdf._page import PageObject
 
-# Paths (adjust if your layout differs)
 BASE_DIR = os.path.dirname(__file__)
 ASSETS_DIR = os.path.join(BASE_DIR, "..", "assets")
 SAMPLE_REPORT_PDF = os.path.join(ASSETS_DIR, "sample_report.pdf")
 OUTPUT_PDF = "platform_status_report.pdf"
 
-# Define IST timezone
 IST = ZoneInfo("Asia/Kolkata")
+
+
+def _plain_text(value) -> str:
+    return escape(str(value), quote=False)
 
 
 def _build_body_pdf(results: List[dict], body_pdf_path: str) -> None:
@@ -55,17 +58,18 @@ def _build_body_pdf(results: List[dict], body_pdf_path: str) -> None:
     ]
 
     for rec in results:
-        display_name = rec.get("name", "Unknown")
+        display_name = _plain_text(rec.get("name", "Unknown"))
+        url = _plain_text(rec["url"])
+        status = _plain_text(rec["status"])
         story.append(Paragraph(f"<b>Platform:</b> {display_name}", styles["Normal"]))
-        story.append(Paragraph(f"<b>URL:</b> {rec['url']}", styles["Normal"]))
-        story.append(Paragraph(f"<b>Status:</b> {rec['status']}", styles["Normal"]))
+        story.append(Paragraph(f"<b>URL:</b> {url}", styles["Normal"]))
+        story.append(Paragraph(f"<b>Status:</b> {status}", styles["Normal"]))
         if rec.get("error"):
             story.append(Paragraph("<b>Error:</b>", styles["Normal"]))
-            story.append(Paragraph(rec["error"], styles["ErrorText"]))
+            story.append(Paragraph(_plain_text(rec["error"]), styles["ErrorText"]))
         story.append(Spacer(1, 18))
 
     doc.build(story)
-    filename = os.path.basename(body_pdf_path)
     logging.info("Report PDF created.")
 
 
@@ -81,9 +85,7 @@ def _merge_with_sample_report(body_pdf_path: str, output_pdf_path: str) -> None:
             width=sample_report_page.mediabox.width,
             height=sample_report_page.mediabox.height,
         )
-        # Stamp sample_report background first
         merged_page.merge_page(sample_report_page)
-        # Overlay body content on top
         merged_page.merge_page(body_page)
 
         writer.add_page(merged_page)
