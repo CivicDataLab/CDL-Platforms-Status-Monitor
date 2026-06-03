@@ -24,6 +24,27 @@ This project uses Python and GitHub Actions to check multiple platforms (named U
    python scripts/main.py
    ```
 
+   The monitor sends email only when one or more URLs fail.
+
+   Useful local test modes:
+
+   ```bash
+   # Run checks and generate a failure report, but do not send email
+   python scripts/main.py --dry-run
+
+   # Generate a report without sending email
+   python scripts/main.py --report-only
+
+   # Generate a report that includes successful checks too
+   python scripts/main.py --report-only --include-successes
+   ```
+
+   Runtime tuning options:
+
+   ```bash
+   python scripts/main.py --timeout 10 --retries 2 --retry-delay 1 --workers 8
+   ```
+
 4. **Run tests locally**:
 
    ```bash
